@@ -1,12 +1,3 @@
-.app{
-  padding-top: 20px;
-}
-
-.title{
-  margin-bottom: 50px;
-  text-align: center;
-}
-
 .rateBlock{
   padding: 20px 0;
   display: flex;
@@ -16,25 +7,11 @@
   border-bottom: 1px solid #000;
 }
 
-.blocks{
-  display: flex;
-  align-items: center;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #000;
-}
-
-.classification{
-  text-align: center;
-  font-weight: 600;
-}
 
 .valuteValue{
   text-align: center;
 }
 
-.code{
-  width: 10%;
-}
 
 .valuteCode{
   width: 10%;
@@ -46,15 +23,8 @@
   font-weight: 700;
 }
 
-.price{
-  width: 45%;
-}
 
 .valutePrice{
-  width: 45%;
-}
-
-.changes{
   width: 45%;
 }
 
