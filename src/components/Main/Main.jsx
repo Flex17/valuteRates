@@ -1,33 +1,8 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-
+import Header from '../Header/Header'
 import css from './main.module.css'
-import Spinner from "../Spinner/Spinner"
 
-const Main = () => {
-    const [rateList, setRateList] = useState({
-        isLoading: true,
-        valuteList: []
-    })
-
-    useEffect(() => {
-        const url = 'https://www.cbr-xml-daily.ru/daily_json.js'
-
-        axios.get(url)
-            .then(response => {
-                const valuteList = response.data.Valute
-
-                setRateList({
-                    valuteList: valuteList,
-                    isLoading: false
-                })
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }, [setRateList])
-
-    const entries = Object.entries(rateList.valuteList)
+const Main = (props) => {
+    const entries = Object.entries(props.valuteList)
 
     const valutesElements = entries.map(valute => {
         const id = valute[1].ID
@@ -47,7 +22,7 @@ const Main = () => {
                     {value}
                 </div>
                 <div className={`${css.valuteChanges} ${css.valuteValue}`}>
-                    {changes}
+                    {changes[0] === '-' ? changes : '+' + changes}
                 </div>
             </div>
         )
@@ -55,9 +30,8 @@ const Main = () => {
 
     return (
         <div>
-            {rateList.isLoading ?
-                <Spinner /> : valutesElements
-            }
+            <Header date={props.date} />
+            {valutesElements}
         </div>
     )
 }
