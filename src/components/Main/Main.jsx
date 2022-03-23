@@ -1,8 +1,19 @@
+import { useState } from 'react';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import Header from '../Header/Header'
+import ValuteHistory from '../ValuteHistory/ValuteHistory';
+
 import css from './main.module.css'
 
 const Main = (props) => {
-    const entries = Object.entries(props.valuteList)
+    const valuteList = props.valuteList
+    const entries = Object.entries(valuteList)
+
+    const [currentValute, setCurrentValute] = useState({
+        code: '',
+        name: '',
+        value: ''
+    })
 
     const valutesElements = entries.map(valute => {
         const id = valute[1].ID
@@ -14,10 +25,10 @@ const Main = (props) => {
 
         return (
             <div key={id} className={css.rateBlock}>
-                <div className={`${css.valuteCode} ${css.valuteValue}`}>
+                <NavLink to={`/valute/` + code} className={`${css.valuteCode} ${css.valuteValue}`} onClick={() => { setCurrentValute({ code: code, name: name, value: value }) }}>
                     {code}
                     <span className={css.tooltipText}>{name}</span>
-                </div>
+                </NavLink>
                 <div className={`${css.valutePrice} ${css.valuteValue}`}>
                     {value}
                 </div>
@@ -30,8 +41,25 @@ const Main = (props) => {
 
     return (
         <div>
-            <Header date={props.date} />
-            {valutesElements}
+            <Routes>
+                <Route path='*' element={
+                    <div>
+                        <Header date={props.date} />
+                        {valutesElements}
+                    </div>
+                }
+                />
+                <Route path={`/valute/` + currentValute.code} element={
+                    <ValuteHistory
+                        code={currentValute.code}
+                        name={currentValute.name}
+                        date={props.date}
+                        value={currentValute.value}
+                        prevURL={props.prevURL}
+                    />
+                }
+                />
+            </Routes>
         </div>
     )
 }

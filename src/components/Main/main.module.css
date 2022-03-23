@@ -35,7 +35,8 @@
 
 .valuteCode {
     position: relative;
-    display: inline-block;
+    display: block;
+    color: black
 }
 
 .valuteCode .tooltipText {
