@@ -72,29 +72,20 @@ const ValuteHistory = (props) => {
 
             <div className={css.block}>
                 <div className={css.item}>
-                    <div>
-                        {props.date}
-                    </div>
-                    <div>
-                        {props.value}
-                    </div>
+                    <div>{props.date}</div>
+                    <div>{props.value}</div>
                 </div>
 
                 <div>
                     {
                         data.map(elem => {
+                            const date = elem.Date ? elem.Date.substring(0, 10) : ''
+                            const value = elem.Valute[props.code].Value ? elem.Valute[props.code].Value : ''
+
                             return (
-                                <div className={css.item} key={elem.Valute[props.code].Value}>
-                                    <div>
-                                        {
-                                            elem.Date !== '' ? elem.Date.substring(0, 10) : ''
-                                        }
-                                    </div>
-                                    <div>
-                                        {
-                                            elem.Valute[props.code].Value ? elem.Valute[props.code].Value : ''
-                                        }
-                                    </div>
+                                <div className={css.item} key={value}>
+                                    <div>{date}</div>
+                                    <div>{value}</div>
                                 </div>
                             )
                         })
